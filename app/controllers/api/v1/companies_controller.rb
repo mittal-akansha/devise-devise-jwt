@@ -4,8 +4,8 @@ class Api::V1::CompaniesController < ApplicationController
   before_action :set_company,only: [:show,:edit,:destroy]
 
   def index
-    @companies=Company.all
-    # @companies=current_user.companies
+    # @companies=Company.all
+    @companies=current_user.companies
     render json: @companies,status: :ok
   end
   def show

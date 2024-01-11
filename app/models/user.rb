@@ -6,8 +6,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
   has_many :companies
-  before_create :set_user_role   
-  ROLES = %w{admin super_admin collaborater editor manager}
+#   before_create :set_user_role   
+  ROLES = %w{admin , customer }
 
   # ROLES.each do |role_name|
   #   define_method "#{role_name}?" do
@@ -19,21 +19,9 @@ class User < ApplicationRecord
    def admin?
     role == "admin"
    end
-   def super_admin?
-    role == "super_admin"
-   end
-   def collaborater?
-    role == "collaborater"
-   end
-   def editor?
-    role == "editor"
-   end
-   def manager?
-    role == "manager"
-   end
 
-   def set_user_role
-    self.role="admin"
+   def customer?
+       role == "customer"
    end
 
 end
