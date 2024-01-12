@@ -1,6 +1,8 @@
 class Api::V1::BooksController < ApplicationController
+  include I18n
   before_action :authenticate_user!
   before_action :set_book , only: [:show , :update, :destroy ]
+  before_action :set_locale, only: [:show]
 
  def index 
    @books=Book.all
@@ -8,7 +10,8 @@ class Api::V1::BooksController < ApplicationController
  end
  
  def show
-   render json: @book , status: :ok
+  #  render json: @book , status: :ok
+   render json: {message: I18n.t('api.hello',title: @book.title)}
  end
 
  def create
@@ -57,4 +60,8 @@ class Api::V1::BooksController < ApplicationController
  def book_params
    params.require(:book).permit(:title,:genre,:published_date,:price,:language,:author_id)
  end
+
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
 end

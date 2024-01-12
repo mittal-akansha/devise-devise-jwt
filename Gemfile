@@ -51,3 +51,5 @@ gem "devise-jwt"
 gem 'jsonapi-serializer'
 gem 'cancancan'
 gem 'ransack'
+# Gemfile
+gem 'rails-i18n'

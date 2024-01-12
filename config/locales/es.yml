@@ -1,0 +1,4 @@
+es:
+  api:
+    welcome: "¡Bienvenido a nuestra API!"
+    hello: "Hola, %{title} !"
