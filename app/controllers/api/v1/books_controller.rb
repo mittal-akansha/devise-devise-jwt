@@ -1,11 +1,20 @@
 class Api::V1::BooksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_book , only: [:show , :update, :destroy ]
-
- def index 
-   @books=Book.all
-   render json: @books
- end
+  include Pagy::Backend
+  
+  def index 
+   #  @books=Book.all
+   debugger
+   @books= if params[:search].present?
+      Book.where("lower(title) LIKE :search OR lower(genre) LIKE :search OR lower(language) LIKE :search",
+      search: "%#{params[:search].downcase}%")
+    else
+      Book.all
+    end
+    pagy, books = pagy(@books.all, items: params[:per_page], page: params[:page])
+    render json: books
+  end
  
  def show
    render json: @book , status: :ok

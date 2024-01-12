@@ -51,3 +51,4 @@ gem "devise-jwt"
 gem 'jsonapi-serializer'
 gem 'cancancan'
 gem 'ransack'
+gem 'pagy'
